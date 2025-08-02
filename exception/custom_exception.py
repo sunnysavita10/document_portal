@@ -10,7 +10,7 @@ class DocumentPortalException(Exception):
         self.file_name=exc_tb.tb_frame.f_code.co_filename
         self.lineno=exc_tb.tb_lineno
         self.error_message=str(error_message)
-        self.traceback_str = ''.join(traceback.format_exception(*error_details.exc_info())) 
+        self.traceback_str = ''.join(traceback.format_exception(*sys.exc_info())) 
         
     def __str__(self):
        return f"""
