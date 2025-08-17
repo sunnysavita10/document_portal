@@ -1,7 +1,7 @@
 # Project Setup Guide
 
 ## Create Project Folder and Environment Setup
-
+docker pull sunnysavita1095/document-portal-app:latest
 ```bash
 # Create a new project folder
 mkdir <project_folder_name>
