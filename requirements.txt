@@ -16,6 +16,6 @@ docx2txt==0.9
 ipykernel==6.30.0
 streamlit==1.47.1
 pytest==8.4.1
-pypdf==5.8.0
+pypdf==6.0.0
 cfn-lint
 -e .
