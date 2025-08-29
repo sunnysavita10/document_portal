@@ -10,7 +10,7 @@ fastapi==0.116.1
 uvicorn==0.35.0
 python-dotenv==1.1.1
 python-multipart==0.0.20
-PyMuPDF==1.26.3
+PyMuPDF==1.26.4
 structlog==25.4.0
 docx2txt==0.9
 ipykernel==6.30.0
