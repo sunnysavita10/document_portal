@@ -3,7 +3,7 @@ langchain-community==0.3.29
 langchain-core==0.3.72
 
 langchain-groq==0.3.6
-langchain-google-genai==2.1.8
+langchain-google-genai==2.1.10
 
 faiss-cpu==1.11.0.post1
 fastapi==0.116.1
