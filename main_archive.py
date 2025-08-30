@@ -131,10 +131,10 @@ async def chat_query(
         # Prepare FAISS index path
         if use_session_dirs:
             index_dir = os.path.normpath(os.path.join(FAISS_BASE, session_id))
-            # Ensure index_dir is within FAISS_BASE
+            # Ensure index_dir is truly within FAISS_BASE
             faiss_base_abs = os.path.abspath(FAISS_BASE)
             index_dir_abs = os.path.abspath(index_dir)
-            if not index_dir_abs.startswith(faiss_base_abs + os.sep):
+            if os.path.commonpath([faiss_base_abs, index_dir_abs]) != faiss_base_abs:
                 raise HTTPException(status_code=400, detail="Invalid session_id path")
         else:
             index_dir = FAISS_BASE  # type: ignore
