@@ -63,12 +63,17 @@ class ConversationalRAG:
         Load FAISS vectorstore from disk and build retriever + LCEL chain.
         """
         try:
-            if not os.path.isdir(index_path):
+            # Normalize and check index_path is within its base dir
+            normalized_index_path = os.path.normpath(os.path.abspath(index_path))
+            index_base_dir = os.path.normpath(os.path.abspath(os.path.dirname(index_path)))
+            if not normalized_index_path.startswith(index_base_dir):
+                raise FileNotFoundError(f"FAISS index path traversal attempt detected: {index_path}")
+            if not os.path.isdir(normalized_index_path):
                 raise FileNotFoundError(f"FAISS index directory not found: {index_path}")
 
             embeddings = ModelLoader().load_embeddings()
             vectorstore = FAISS.load_local(
-                index_path,
+                normalized_index_path,
                 embeddings,
                 index_name=index_name,
                 allow_dangerous_deserialization=True,  # ok if you trust the index
