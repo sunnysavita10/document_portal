@@ -135,7 +135,7 @@ class ChatIngestor:
         log.info("Documents split", chunks=len(chunks), chunk_size=chunk_size, overlap=chunk_overlap)
         return chunks
     
-    def build_retriever( self,
+    def built_retriver( self,
         uploaded_files: Iterable,
         *,
         chunk_size: int = 1000,
