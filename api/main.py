@@ -135,7 +135,12 @@ async def chat_query(
             raise HTTPException(status_code=400, detail="session_id is required when use_session_dirs=True")
 
         index_dir = os.path.join(FAISS_BASE, session_id) if use_session_dirs else FAISS_BASE  # type: ignore
-        if not os.path.isdir(index_dir):
+        # Normalize and securely check index_dir for path traversal
+        abs_faiss_base = os.path.abspath(FAISS_BASE)
+        abs_index_dir = os.path.abspath(os.path.normpath(index_dir))
+        if not abs_index_dir.startswith(abs_faiss_base + os.sep) and abs_index_dir != abs_faiss_base:
+            raise HTTPException(status_code=400, detail="Invalid session_id or directory traversal attempt detected.")
+        if not os.path.isdir(abs_index_dir):
             raise HTTPException(status_code=404, detail=f"FAISS index not found at: {index_dir}")
 
         rag = ConversationalRAG(session_id=session_id)
